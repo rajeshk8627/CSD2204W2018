@@ -1,0 +1,60 @@
+MariaDB [csd2204w18]> CREATE OR REPLACE TRIGGER `stud_marks_BUPD`
+    -> 
+    -> BEFORE UPDATE ON stud_marks FOR EACH ROW
+    -> BEGIN
+    -> SET NEW.TOTAL = NEW.SUB1 + NEW.SUB2 + NEW.SUB3 +
+    -> NEW.SUB4 + NEW.SUB5;
+    -> SET NEW.PERCENTAGE = NEW.TOTAL/5;
+    -> IF NEW.PERCENTAGE >=90
+    -> THEN SET NEW.GRADE = 'EXCELLENT';
+    -> ELSEIF NEW.PERCENTAGE>=75 AND NEW.PERCENTAGE<90
+    -> THEN SET NEW.GRADE = 'VERY GOOD';
+    -> ELSEIF NEW.PERCENTAGE>=60 AND NEW.PERCENTAGE<75
+    -> THEN SET NEW.GRADE = 'GOOD';
+    -> ELSEIF NEW.PERCENTAGE>=40 AND NEW.PERCENTAGE<60
+    -> THEN SET NEW.GRADE = 'AVERAGE';
+    -> ELSE SET NEW.GRADE = 'NOT PROMOTED';
+    -> END IF;
+    -> END$$
+    -> ;
+    -> $5
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 18
+MariaDB [csd2204w18]> CREATE OR REPLACE TRIGGER `stud_marks_BUPD`
+    -> BEFORE UPDATE ON stud_marks FOR EACH ROW
+    -> BEGIN
+    -> SET NEW.TOTAL = NEW.SUB1 + NEW.SUB2 + NEW.SUB3 +
+    -> NEW.SUB4 + NEW.SUB5;
+    -> SET NEW.PERCENTAGE = NEW.TOTAL/5;
+    -> IF NEW.PERCENTAGE >=90
+    -> THEN SET NEW.GRADE = 'EXCELLENT';
+    -> ELSEIF NEW.PERCENTAGE>=75 AND NEW.PERCENTAGE<90
+    -> THEN SET NEW.GRADE = 'VERY GOOD';
+    -> ELSEIF NEW.PERCENTAGE>=60 AND NEW.PERCENTAGE<75
+    -> THEN SET NEW.GRADE = 'GOOD';
+    -> ELSEIF NEW.PERCENTAGE>=40 AND NEW.PERCENTAGE<60
+    -> THEN SET NEW.GRADE = 'AVERAGE';
+    -> ELSE SET NEW.GRADE = 'NOT PROMOTED';
+    -> END IF;
+    -> END$5
+Query OK, 0 rows affected (0.11 sec)
+
+MariaDB [csd2204w18]> UPDATE STUD_MARKS SET SUB1 = 54, SUB2 = 69, SUB3 = 89, SUB4 =
+    -> 87, SUB5 = 59 WHERE STUDENT_ID = 1;
+    -> exit;
+    -> exit
+    -> mysqldump -u root -p
+    -> $5
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exit;
+exit
+mysqldump -u root -p' at line 1
+MariaDB [csd2204w18]> exit;
+    -> 
+    -> exit
+    -> $5
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exit;
+
+exit' at line 1
+MariaDB [csd2204w18]> exit
